@@ -60,7 +60,6 @@ def scoreboard():
         session['referer'] = ''
     # Get ranking table
     ranking = getRanking()
-    print ranking
     return render_template(
         'score.html',
         ranking = ranking
@@ -88,12 +87,14 @@ def challenges():
         challs = challs
     )
 
-@app.route("/challenge")
+@app.route("/challenge", methods=['GET', 'POST'])
 def challenge():
     """ Challenges
 
     Show a challenge
     """
+    status = 0
+    message = ''
     # Check for the login status
     if not checkLogin():
         session['referer'] = 'challenges'
@@ -108,14 +109,27 @@ def challenge():
     cid = request.args.get("id", default=0, type=int)
     if cid <= 0:
         return redirect(url_for('challenges'))
+    # Check flag is submitted
+    if isSolved(cid):
+        message = 'You have already solved this challenge.'
+        status = 2
+    elif request.method == 'POST':
+        if 'flag' in request.form:
+            if submitFlag(cid, request.form['flag']):
+                message = 'The flag is correct!'
+                status = 1
+            else:
+                message = 'The flag is wrong...'
+                status = -1
     # Get challenge info
     chall = getChallenge(cid)
     if not chall:
         return redirect(url_for('challenges'))
-    print chall
     return render_template(
         'challenge.tmpl',
-        chall = chall
+        chall = chall,
+        status = status,
+        message = message
     )
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -185,7 +199,7 @@ def getRanking():
     """ Get the ranking """
     with closing(sqlite3.connect(config.dbpath)) as conn:
         c = conn.cursor()
-        c.execute(u"SELECT username,score FROM account ORDER BY score")
+        c.execute(u"SELECT username,score FROM account ORDER BY score DESC")
         result = c.fetchall()
     return result
 
@@ -233,6 +247,38 @@ def tryRegister(username, password):
             return False
     return True
 
+def isSolved(cid):
+    """ Check if the challenge is already solved """
+    with closing(sqlite3.connect(config.dbpath)) as conn:
+        c = conn.cursor()
+        c.execute(u"SELECT solved FROM account WHERE username=?", (session['username'],))
+        result = c.fetchone()
+    print result
+    for x in result[0].split(','):
+        try:
+            if cid == int(x):
+                return True
+        except:
+            pass
+    return False
+
+def submitFlag(cid, flag):
+    """ Submit flag """
+    with closing(sqlite3.connect(config.dbpath)) as conn:
+        c = conn.cursor()
+        c.execute(u"SELECT flag,score FROM challenge WHERE id=?", (cid,))
+        result = c.fetchone()
+    valid_flag, score = result
+    if flag.replace(" ", "") != valid_flag:
+        return False
+    # Flag is correct
+    with closing(sqlite3.connect(config.dbpath)) as conn:
+        c = conn.cursor()
+        c.execute(u"UPDATE account SET score=score+?, solved=?||','||solved WHERE username=?", (score, str(cid), session['username']))
+        c.execute(u"UPDATE challenge SET solved=solved+1 WHERE id=?", (cid,))
+        conn.commit()
+    return True
+
 def checkLogin():
     """ Check if the user is already logged in. """
     if 'login' in session and session['login']:
@@ -273,8 +319,6 @@ def formatDate(date):
     return date.strftime(config.date_format)
 
 def initDB():
-    sqlite3.register_adapter(list, lambda l: ';'.join(map(str, l)))
-    sqlite3.register_converter('LIST', lambda s: map(int, s.split(';')))
     with closing(sqlite3.connect(config.dbpath)) as conn:
         c = conn.cursor()
         # Create account table if not exist
@@ -286,7 +330,7 @@ def initDB():
             username CHAR(64) NOT NULL UNIQUE,
             password CHAR(128) NOT NULL,
             score    INTEGER NOT NULL DEFAULT 0,
-            solved   LIST DEFAULT ''
+            solved   TEXT DEFAULT ''
             )
             """
             c.execute(create_table)

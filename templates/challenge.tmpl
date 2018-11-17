@@ -40,6 +40,11 @@
             <!-- Page Content -->
             <div id="page-content-wrapper">
 		<div class="container-fluid">
+		    {% if message %}
+			<div class="alert alert-{% if status == 1 %}success{% elif status == 2 %}info{% else %}danger{% endif %}" role="alert">
+			    {{message}}
+			</div>
+		    {% endif %}
 		    <div class="card">
 			<div class="card-header">{{chall.1}} - {{chall.3}}pt</div>
 			<div class="card-body">
