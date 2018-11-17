@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="OCamLAB CTF">
+	<meta name="author" content="ptr-yudai">
+	<link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/static/css/simple-sidebar.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	<script src="/static/vendor/jquery/jquery.min.js"></script>
+	<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<title>{{chall.1}} - OCamLAB CTF</title>
+    </head>
+
+    <body>
+	<div id="wrapper" class="toggled">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+		<ul class="sidebar-nav">
+                    <li class="sidebar-brand">
+			<a href="/">OCamLAB CTF 8th</a>
+                    </li>
+                    <li>
+			<a href="/token">Team Token</a>
+                    </li>
+                    <li>
+			<a href="/score">Scoreboard</a>
+                    </li>
+                    <li>
+			<a href="/challenges">Challenges</a>
+                    </li>
+                    <li>
+			<a href="/logout">Logout</a>
+                    </li>
+		</ul>
+            </div>
+	    
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+		<div class="container-fluid">
+		    <div class="card">
+			<div class="card-header">{{chall.1}} - {{chall.3}}pt</div>
+			<div class="card-body">
+			    {{chall.2}}
+			</div>
+		    </div><br>
+		    <div class="card">
+			<div class="card-header">Submit The Flag</div>
+			<div class="card-body">
+			    <p>Enter the attack flag for this challenge below.</p>
+			    <form action="/challenge?id={{chall.0}}" method="POST" role="form">
+				<div class="input-group md-3">
+				    <div class="input-group-prepend">
+					<span class="input-group-text" id="flag">
+					    <i class="fa fa-flag"></i>
+					</span>
+				    </div>
+				    <input type="text" name="flag" placeholder="flag-[0-9a-zA-Z]{32}"
+					   class="form-control" aria-describedby="flag" aria-label="flag" required>
+				    <button type="submit" class="btn btn-primary col-md-1">Submit</button>
+				</div>
+			    </form>
+			</div>
+		    </div>
+		</div>
+            </div>
+            <!-- /#page-content-wrapper -->
+	    <div id="btn-toggle">
+                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">
+		    <i class="fas fa-bars"></i>
+		</a>
+	    </div>
+	</div>
+	<!-- Menu Toggle Script -->
+	<script>
+	 $("#menu-toggle").click(function(e) {
+             e.preventDefault();
+             $("#wrapper").toggleClass("toggled");
+	 });
+	</script>
+    </body>
+</html>
