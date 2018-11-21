@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<script src="/static/vendor/jquery/jquery.min.js"></script>
 	<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<title>OCamLab CTF</title>
+	<title>{{ctf.name}}</title>
     </head>
 
     <body>
@@ -20,7 +20,7 @@
             <div id="sidebar-wrapper">
 		<ul class="sidebar-nav">
                     <li class="sidebar-brand">
-			<a href="/">OCamLAB CTF 8th</a>
+			<a href="/">{{ctf.brand}}</a>
                     </li>
                     <li>
 			<a href="/token">Team Token</a>
@@ -49,18 +49,23 @@
             <!-- Page Content -->
             <div id="page-content-wrapper">
 		<div class="container-fluid">
-                    <h1><img src="/static/logo.png" width="128px"> OCamLAB CTF 8th</h1>
+                    <h1><img src="/static/logo.png" width="128px"> {{ctf.brand}}</h1>
 		    
 		    {% if login %}
-		    <p>Welcome to the 8th OCamLAB CTF!</p>
+		    <p>Welcome to the 9th OCamLAB CTF!</p>
 		    {% else %}
 		    <p>
 			Please <a href="/register">register</a> your account
 			and <a href="/login">login</a> first.
 		    </p>
 		    {% endif %}
+		    <h2>Duration</h2>
                     <p>
-			Duration：{{duration.start}} - {{duration.end}}
+			The CTF starts at {{duration.global.start}} and ends at {{duration.global.end}}.
+		    </p>
+		    <h2>Rule</h2>
+		    <p>
+			No rule so far.
 		    </p>
 		</div>
             </div>
