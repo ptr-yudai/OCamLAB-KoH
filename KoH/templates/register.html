@@ -43,87 +43,116 @@
             <!-- Page Content -->
             <div id="page-content-wrapper">
 		<div class="container-fluid">
-                    <h1>Register</h1>
-		    <p>Please enter your information and register your account.</p>
-		    <div class="login-popup-wrap new_login_popup"> 
-                        <div class="login-popup-heading text-center">
-                            <h4><i class="fa fa-lock" aria-hidden="true"></i> Register </h4>
-			    {% if message %}
-			    <div class="row">
-				<div class="col-md-4"></div>
-				<div class="col-md-4 alert alert-danger" role="alert">
-				    {{message}}
-				    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				    </button>
+		    <!-- Register New User -->
+		    <form class="form-horizontal" role="form" method="POST" action="/register">
+			<div class="row">
+			    <div class="col-md-3"></div>
+			    <div class="col-md-6">
+				<h2><i class="fa fa-users" aria-hidden="true"></i> Register New User</h2>
+				<hr>
+			    </div>
+			</div>
+			<!-- Username -->
+			<div class="row">
+			    <div class="col-md-3 field-label-responsive">
+				<label for="username">Username</label>
+			    </div>
+			    <div class="col-md-6">
+				<div class="form-group">
+				    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+					<input type="text" name="username" class="form-control" id="username"
+					       placeholder="Username" required autofocus>
+				    </div>
+				</div>
+			    </div>
+			</div>
+			<!-- Invitation Code -->
+			<div class="row">
+			    <div class="col-md-3 field-label-responsive">
+				<label for="teamcode">Invitation Code</label>
+			    </div>
+			    <div class="col-md-6">
+				<div class="form-group">
+				    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-id-card"></i></div>
+					<input type="text" name="teamcode" class="form-control" id="teamcode"
+					       placeholder="Your team's invitation code" required autofocus>
+				    </div>
+				</div>
+			    </div>
+			</div>
+			<!-- Password -->
+			<div class="row">
+			    <div class="col-md-3 field-label-responsive">
+				<label for="password">Password</label>
+			    </div>
+			    <div class="col-md-6">
+				<div class="form-group">
+				    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+					<input type="password" name="password" class="form-control" id="password"
+					       placeholder="Password" required autofocus>
+				    </div>
+				</div>
+			    </div>
+			    {% if error.password %}
+			    <div class="col-md-3">
+				<div class="form-control-feedback">
+				    <span class="text-danger align-middle">
+					<i class="fa fa-close">{{error.password}}</i>
+				    </span>
 				</div>
 			    </div>
 			    {% endif %}
-                        </div>
-			
-			<form class="form-horizontal" role="form" method="POST" action="/register">
-			    <div class="row">
-				<div class="col-md-3 field-label-responsive">
-				    <label for="username">Username</label>
-				</div>
-				<div class="col-md-6">
-				    <div class="form-group">
-					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-					    <div class="input-group-addon" style="width: 2.6rem">
-						<i class="fa fa-user"></i>
-					    </div>
-					    <input type="text" name="username" class="form-control"
-						   id="username" placeholder="Username" required autofocus>
-					</div>
-				    </div>
-				</div>
-			    </div>
-			    <div class="row">
-				<div class="col-md-3 field-label-responsive">
-				    <label for="password">Password</label>
-				</div>
-				<div class="col-md-6">
-				    <div class="form-group has-danger">
-					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-					    <div class="input-group-addon" style="width: 2.6rem">
-						<i class="fa fa-key"></i>
-					    </div>
-					    <input type="password" name="password" class="form-control"
-						   id="password" placeholder="Password" required>
-					</div>
-				    </div>
-				</div>
-			    </div>
-			    <div class="row">
-				<div class="col-md-3 field-label-responsive">
-				    <label for="password-confirm">Confirm Password</label>
-				</div>
-				<div class="col-md-6">
-				    <div class="form-group">
-					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-					    <div class="input-group-addon" style="width: 2.6rem">
-						<i class="fa fa-repeat"></i>
-					    </div>
-					    <input type="password" name="password-confirm" class="form-control"
-						   id="password-confirm" placeholder="Password" required>
-					</div>
-				    </div>
-				</div>
-			    </div>
-			    <div class="row">
-				<div class="col-md-5"></div>
-				<div class="col-md-6">
-				    <button type="submit" class="btn btn-success">
-					<i class="fa fa-user-plus"></i> Register
-				    </button>
-				</div>
-			    </div>
-			</form>
-			<br>
-                        <div class="text-center">
-			    Already registered? <a href="/login">Click here</a> to login
 			</div>
-                    </div>
+			<!-- Password (Confirm) -->
+			<div class="row">
+			    <div class="col-md-3 field-label-responsive">
+				<label for="password-confirm">Confirm Password</label>
+			    </div>
+			    <div class="col-md-6">
+				<div class="form-group">
+				    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+					<input type="password" name="password-confirm" class="form-control" id="password-confirm"
+					       placeholder="Password (Confirmation)" required autofocus>
+				    </div>
+				</div>
+			    </div>
+			    {% if error.password %}
+			    <div class="col-md-3">
+				<div class="form-control-feedback">
+				    <span class="text-danger align-middle">
+					<i class="fa fa-close">{{error.password}}</i>
+				    </span>
+				</div>
+			    </div>
+			    {% endif %}
+			</div>
+			<!-- Country -->
+			<div class="row">
+			    <div class="col-md-3 field-label-responsive">
+				<label for="country">Country</label>
+			    </div>
+			    <div class="col-md-6">
+				<div class="form-group">
+				    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-flag"></i></div>
+					<input type="text" name="country" class="form-control" id="country"
+					       placeholder="Country" required autofocus>
+				    </div>
+				</div>
+			    </div>
+			</div>
+		    </form>
+		    <br>
+		    <div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+			    Already registered? <a href="/login">Click here</a>
+			</div>
+		    </div>
 		</div>
             </div>
             <!-- /#page-content-wrapper -->

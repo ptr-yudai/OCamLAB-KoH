@@ -5,15 +5,15 @@ from KoH.core import CTF
 from KoH.core import Authentication
 from KoH.core import SiteManager
 
-@app.route("/login", methods=['GET', 'POST'])
-def login():
-    """ ログイン画面 """
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    """ 登録画面 """
     ctf = CTF.GetInformation()
-    error = {'password': ''}
+    error = {'username': '', 'password': ''}
     # ログイン済み
     if Authentication.CheckLogin():
         return SiteManager.JumpToReferer()
-    # ログイン試行
+    # 登録試行
     if flask.request.method == 'POST':
         if 'username' in flask.request.form and 'password' in flask.request.form:
             userinfo = Authentication.TryLogin(
@@ -23,12 +23,12 @@ def login():
                 flask.session['login'] = True
                 flask.session['teamname'] = userinfo['teamname']
                 flask.session['username'] = userinfo['username']
-                return SiteManager.JumpToReferer()
+                return SiteManager.JumpToPage('login')
             else:
                 error['password'] = "Invalid username or password"
     # サイトを表示する
     return flask.render_template(
-        'login.html',
+        'register.html',
         ctf = ctf,
         error = error
     )
