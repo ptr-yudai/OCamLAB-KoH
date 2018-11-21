@@ -3,6 +3,7 @@ import flask
 from KoH import app
 from KoH.core import CTF
 from KoH.core import DatetimeManager
+from KoH.core import Authentication
 
 @app.route("/")
 def index():
