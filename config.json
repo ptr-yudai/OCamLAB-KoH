@@ -1,0 +1,33 @@
+{
+    "debug": true,
+    "server": {
+	"host": "0.0.0.0",
+	"port": 8080,
+	"secret": ""
+    },
+    "ctf": {
+	"name": "OCamLab CTF",
+	"brand": "OCamLab CTF 9th",
+	"team": false,
+	"duration": {
+	    "timezone": "Asia/Tokyo",
+	    "start": {
+		"year"  : 2018,
+		"month" : 11,
+		"date"  : 20,
+		"hour"  : 0,
+		"minute": 0,
+		"second": 0
+	    },
+	    "end": {
+		"year"  : 2018,
+		"month" : 11,
+		"date"  : 27,
+		"hour"  : 0,
+		"minute": 0,
+		"second": 0
+	    },
+	    "format": "%Y-%m-%d %H:%M:%S %Z"
+	}
+    }
+}
