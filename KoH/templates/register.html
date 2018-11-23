@@ -48,10 +48,17 @@
 			<div class="row">
 			    <div class="col-md-3"></div>
 			    <div class="col-md-6">
-				<h2><i class="fa fa-users" aria-hidden="true"></i> Register New User</h2>
+				{% if ctf.team %}
+				<h2><i class="fa fa-user" aria-hidden="true"></i> Join in a team</h2>
+				{% else %}
+				<h2><i class="fa fa-user" aria-hidden="true"></i> Register</h2>
+				{% endif %}
 				<hr>
 			    </div>
 			</div>
+			{% if ctf.team %}
+			<p>You can join in a team using your team's invitation code.</p>
+			{% endif %}
 			<!-- Username -->
 			<div class="row">
 			    <div class="col-md-3 field-label-responsive">
@@ -68,6 +75,7 @@
 			    </div>
 			</div>
 			<!-- Invitation Code -->
+			{% if ctf.team %}
 			<div class="row">
 			    <div class="col-md-3 field-label-responsive">
 				<label for="teamcode">Invitation Code</label>
@@ -77,11 +85,12 @@
 				    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
 					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-id-card"></i></div>
 					<input type="text" name="teamcode" class="form-control" id="teamcode"
-					       placeholder="Your team's invitation code" required autofocus>
+					       placeholder="Your team's invitation code" required>
 				    </div>
 				</div>
 			    </div>
 			</div>
+			{% endif %}
 			<!-- Password -->
 			<div class="row">
 			    <div class="col-md-3 field-label-responsive">
@@ -92,7 +101,7 @@
 				    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
 					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
 					<input type="password" name="password" class="form-control" id="password"
-					       placeholder="Password" required autofocus>
+					       placeholder="Password" required>
 				    </div>
 				</div>
 			    </div>
@@ -116,7 +125,7 @@
 				    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
 					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
 					<input type="password" name="password-confirm" class="form-control" id="password-confirm"
-					       placeholder="Password (Confirmation)" required autofocus>
+					       placeholder="Password (Confirmation)" required>
 				    </div>
 				</div>
 			    </div>
@@ -140,9 +149,16 @@
 				    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
 					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-flag"></i></div>
 					<input type="text" name="country" class="form-control" id="country"
-					       placeholder="Country" required autofocus>
+					       placeholder="Country">
 				    </div>
 				</div>
+			    </div>
+			</div>
+			<!-- Submit Button -->
+			<div class="row">
+			    <div class="col-md-3"><input type="hidden" name="user" value="1"></div>
+			    <div class="col-md-6">
+				<button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Register</button>
 			    </div>
 			</div>
 		    </form>
@@ -153,6 +169,66 @@
 			    Already registered? <a href="/login">Click here</a>
 			</div>
 		    </div>
+		    <br>
+		    <!-- Register New Team -->
+		    {% if ctf.team %}
+		    <form class="form-horizontal" role="form" method="POST" action="/register">
+			<div class="row">
+			    <div class="col-md-3"></div>
+			    <div class="col-md-6">
+				<h2><i class="fa fa-users" aria-hidden="true"></i> Create a team</h2>
+				<hr>
+			    </div>
+			</div>
+			<p>We will send you an invitation code right after you create a team. The team members can join in the team by using the invitation code.</p>
+			<!-- Team Name -->
+			<div class="row">
+			    <div class="col-md-3 field-label-responsive">
+				<label for="teamname">Team name</label>
+			    </div>
+			    <div class="col-md-6">
+				<div class="form-group">
+				    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-users"></i></div>
+					<input type="text" name="teamname" class="form-control" id="teamname"
+					       placeholder="Team name" required autofocus>
+				    </div>
+				</div>
+			    </div>
+			</div>
+			<!-- Password -->
+			<div class="row">
+			    <div class="col-md-3 field-label-responsive">
+				<label for="password">E-mail</label>
+			    </div>
+			    <div class="col-md-6">
+				<div class="form-group">
+				    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-envelope"></i></div>
+					<input type="text" name="email" class="form-control" id="email"
+					       placeholder="E-mail" required>
+				    </div>
+				</div>
+			    </div>
+			    {% if error.password %}
+			    <div class="col-md-3">
+				<div class="form-control-feedback">
+				    <span class="text-danger align-middle">
+					<i class="fa fa-close">{{error.password}}</i>
+				    </span>
+				</div>
+			    </div>
+			    {% endif %}
+			</div>
+			<!-- Submit Button -->
+			<div class="row">
+			    <div class="col-md-3"><input type="hidden" name="team" value="1"></div>
+			    <div class="col-md-6">
+				<button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Register</button>
+			    </div>
+			</div>
+			{% endif %}
+		    </form>
 		</div>
             </div>
             <!-- /#page-content-wrapper -->

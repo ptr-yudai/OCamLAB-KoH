@@ -7,5 +7,6 @@ def GetInformation():
     ctf = {
         'name': config['ctf']['name'],
         'brand': config['ctf']['brand'],
+        'team': config['ctf']['team']
     }
     return ctf
