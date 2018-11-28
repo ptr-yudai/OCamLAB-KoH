@@ -29,6 +29,7 @@
 		"second": 0
 	    },
 	    "format": "%Y-%m-%d %H:%M:%S %Z"
-	}
+	},
+	"over-open": true
     }
 }

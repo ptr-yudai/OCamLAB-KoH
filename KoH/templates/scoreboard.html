@@ -54,12 +54,15 @@
 			    {% for team in ranking %}
 			    <tr>
 				<th score="row">{{loop.index}}</th>
-				<td>{{team.0}}</td>
-				<td>{{team.1}}</td>
+				<td>{{team.teamname}}</td>
+				<td>{{team.score}}</td>
 			    </tr>
 			    {% endfor %}
 			</tbody>
 		    </table>
+		    {% for set in log %}
+		    <p>[{{set.timestamp}}] <strong>{{set.teamname}}</strong> got <strong>{{set.score}}</strong>pt [{{set.title}}]</p>
+		    {% endfor %}
 		</div>
             </div>
             <!-- /#page-content-wrapper -->

@@ -6,6 +6,7 @@ from KoH.core import Configure
 from KoH.interface import index
 from KoH.interface import scoreboard
 from KoH.interface import challenges
+from KoH.interface import challenge
 from KoH.interface import login
 from KoH.interface import register
 from KoH.interface import logout

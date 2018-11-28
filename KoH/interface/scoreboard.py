@@ -5,6 +5,7 @@ from KoH.core import CTF
 from KoH.core import Authentication
 from KoH.core import Database
 from KoH.core import SiteManager
+from KoH.core import Challenge
 
 @app.route("/score")
 def scoreboard():
@@ -16,12 +17,15 @@ def scoreboard():
         return SiteManager.JumpToPage('login')
     # ランキング取得
     ranking = Database.Query(
-        "SELECT teamname,score FROM team ORDER BY score, lastlog DESC"
+        "SELECT * FROM team ORDER BY score, lastlog DESC"
     )
+    # ログ取得
+    log = Challenge.GetRecentLog()
     print ranking
     # サイトを表示する
     return flask.render_template(
         'scoreboard.html',
         ctf = ctf,
-        ranking = ranking
+        ranking = ranking,
+        log = log
     )

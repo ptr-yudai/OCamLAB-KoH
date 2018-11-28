@@ -6,6 +6,7 @@ from KoH.core import Authentication
 from KoH.core import Database
 from KoH.core import DatetimeManager
 from KoH.core import SiteManager
+from KoH.core import Challenge
 
 @app.route("/challenges")
 def challenges():
@@ -16,10 +17,8 @@ def challenges():
         SiteManager.SetReferer('challenges')
         return SiteManager.JumpToPage('login')
     # 問題一覧取得
-    challs = Database.Query(
-        "SELECT title,category,score,solved FROM challenge ORDER BY category"
-    )
-    print challs
+    challs = Challenge.GetAllChallenges()
+    solved = Challenge.GetSolved(flask.session['teamname'])
     # 開催中か
     running = DatetimeManager.CheckDuration()
     # サイトを表示する
@@ -27,5 +26,6 @@ def challenges():
         'challenges.html',
         ctf = ctf,
         running = running,
-        challs = challs
+        challs = challs,
+        solved = solved
     )

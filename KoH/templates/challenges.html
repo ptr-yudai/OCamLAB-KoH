@@ -54,8 +54,8 @@
 		    <div class="row">
 			{% for chall in challs %}
 			<div class="col-md-3">
-			    <a style="text-decoration:none;" href="/challenge?id={{chall.0}}">
-				<div class="card text-white bg-secondary" style="padding:12px;">
+			    <a style="text-decoration:none;" href="/challenge?id={{chall.id}}">
+				<div class="card text-white bg-{% if chall.id in solved %}success{% else %}secondary{% endif %}" style="padding:12px;">
 				    <h5 class="card-title"><strong>{{chall.title}}</strong></h5>
 				    <div class="card-text">
 					Category: {{chall.category}}<br>
