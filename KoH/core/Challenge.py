@@ -7,7 +7,7 @@ import Database
 def GetRecentLog(n=20):
     """解答ログを取得する"""
     result = Database.Query(
-        "SELECT * FROM log LIMIT ?",
+        "SELECT * FROM log ORDER BY timestamp DESC LIMIT ?",
         (n,)
     )
     return result

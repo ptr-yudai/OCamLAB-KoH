@@ -13,7 +13,7 @@ def AddPoint(teamname, title, score):
     """防御点を追加する"""
     Database.Query(
         "UPDATE team SET score=score+?, lastlog=? WHERE teamname=?",
-        (score, datatime.datetime.now(), teamname)
+        (score, datetime.datetime.now(), teamname)
     )
     Database.Query(
         "INSERT INTO log(title, teamname, username, score) VALUES(?, ?, ?, ?)",
@@ -30,7 +30,7 @@ def CheckDefense():
     # トークン取得
     new_tokens = Token.NewTokens()
     old_tokens = Token.GetTokens(path)
-    print("[+] Checking defense points...")
+    print("[+] Checking defense points ({0})".format(datetime.datetime.now()))
     # 各問題のトークンの調査
     for module in glob.glob("scripts/*.py"):
         module = module.replace("/", ".")[:-3]
