@@ -1,6 +1,7 @@
 # coding: utf-8
 import flask
 import sqlite3
+import datetime
 import Database
 
 def GetRecentLog(n=20):
@@ -14,8 +15,8 @@ def GetRecentLog(n=20):
 def AddPoint(cid, chall, teamname, username):
     """加点する"""
     Database.Query(
-        "UPDATE team SET score=score+?,solved=solved||? WHERE teamname=?",
-        (chall['score'], str(cid)+',', teamname)
+        "UPDATE team SET score=score+?,lastlog=?,solved=solved||? WHERE teamname=?",
+        (chall['score'], datetime.datetime.now(), str(cid)+',', teamname)
     )
     Database.Query(
         "UPDATE challenge SET solved=solved+1 WHERE id=?",

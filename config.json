@@ -31,5 +31,9 @@
 	    "format": "%Y-%m-%d %H:%M:%S %Z"
 	},
 	"over-open": true
+    },
+    "koh": {
+	"interval": 300,
+	"score": 10
     }
 }
