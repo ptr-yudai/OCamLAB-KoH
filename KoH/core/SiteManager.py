@@ -9,7 +9,10 @@ def JumpToPage(page):
 
 def JumpToReferer():
     """ 元いたページにジャンプする """
-    return flask.redirect(flask.url_for(flask.session['referer']))
+    if 'referer' in flask.session:
+        return flask.redirect(flask.url_for(flask.session['referer']))
+    else:
+        return flask.redirect(flask.url_for('index'))
 
 
 def SetReferer(page):

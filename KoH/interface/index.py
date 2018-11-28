@@ -10,10 +10,12 @@ from KoH.core import SiteManager
 def index():
     ctf = CTF.GetInformation()
     duration = DatetimeManager.GetDurationSet()
+    login = Authentication.CheckLogin()
     # サイトを表示する
     SiteManager.SetReferer('index')
     return flask.render_template(
         'index.html',
         ctf = ctf,
-        duration = duration
+        duration = duration,
+        login = login
     )

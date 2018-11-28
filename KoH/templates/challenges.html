@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<script src="/static/vendor/jquery/jquery.min.js"></script>
 	<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<title>Challenges - OCamLab CTF</title>
+	<title>Challenges - {{ctf.name}}</title>
     </head>
 
     <body>
@@ -21,7 +21,7 @@
             <div id="sidebar-wrapper">
 		<ul class="sidebar-nav">
                     <li class="sidebar-brand">
-			<a href="/">OCamLAB CTF 8th</a>
+			<a href="/">{{ctf.brand}}</a>
                     </li>
                     <li>
 			<a href="/token">Team Token</a>
@@ -42,23 +42,25 @@
             <div id="page-content-wrapper">
 		<div class="container-fluid">
                     <h1>Challenges</h1>
-		    {% if running %}
+		    {% if running == 0 %}
 		    <p>The following challenges are available now.</p>
+		    {% elif running == 1 %}
+		    <p>The CTF has not started yet.</p>
 		    {% else %}
-		    <p>The CTF is not running..</p>
+		    <p>The CTF is over.</p>
 		    {% endif %}
 
-		    {% if running %}
+		    {% if running == 0 %}
 		    <div class="row">
 			{% for chall in challs %}
 			<div class="col-md-3">
 			    <a style="text-decoration:none;" href="/challenge?id={{chall.0}}">
 				<div class="card text-white bg-secondary" style="padding:12px;">
-				    <h5 class="card-title"><strong>{{chall.1}}</strong></h5>
+				    <h5 class="card-title"><strong>{{chall.title}}</strong></h5>
 				    <div class="card-text">
-					Category: {{chall.3}}<br>
-					Score: {{chall.2}}pt<br>
-					Solved: {{chall.4}}
+					Category: {{chall.category}}<br>
+					Score: {{chall.score}}pt<br>
+					Solved: {{chall.solved}}
 				    </div>
 				</div>
 			    </a>

@@ -42,19 +42,32 @@ def InitializeDatabase():
         create_table = """
         CREATE TABLE account(
         id       INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-        teamname CHAR(64) NOT NULL,
+        teamname CHAR(32) NOT NULL,
+        usericon BLOB,
+        username CHAR(32) NOT NULL UNIQUE,
+        password CHAR(128) NOT NULL,
+        country  CHAR(64) NOT NULL
+        )
+        """
+        Database.Query(create_table)
+        print("[+] `account` table is created")
+    # teamテーブルの作成
+    res = Database.Query("SELECT name FROM sqlite_master WHERE type='table' AND name='team'")
+    if not res:
+        create_table = """
+        CREATE TABLE team(
+        id       INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+        teamname CHAR(32) NOT NULL UNIQUE,
         teamcode CHAR(64) NOT NULL,
         teamicon BLOB,
-        username CHAR(64) NOT NULL UNIQUE,
-        password CHAR(128) NOT NULL,
-        country  CHAR(64) NOT NULL,
+        country  CHAR(64) NOT NULL DEFAULT '',
         score    INTEGER NOT NULL DEFAULT 0,
         solved   TEXT DEFAULT '',
         lastlog  TIMESTAMP DEFAULT (DATETIME('now','localtime'))
         )
         """
         Database.Query(create_table)
-        print("[+] `account` table is created")
+        print("[+] `team` table is created")
     # challengeテーブルの作成
     res = Database.Query("SELECT name FROM sqlite_master WHERE type='table' AND name='challenge'")
     if not res:

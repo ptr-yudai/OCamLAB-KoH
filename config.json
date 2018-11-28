@@ -3,7 +3,8 @@
     "server": {
 	"host": "0.0.0.0",
 	"port": 8080,
-	"secret": ""
+	"secret": "",
+	"email": "noreply@jctf.tk"
     },
     "ctf": {
 	"name": "OCamLab CTF",
@@ -20,7 +21,7 @@
 		"second": 0
 	    },
 	    "end": {
-		"year"  : 2018,
+		"year"  : 2020,
 		"month" : 11,
 		"date"  : 27,
 		"hour"  : 0,

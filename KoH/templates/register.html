@@ -58,6 +58,21 @@
 			</div>
 			{% if ctf.team %}
 			<p>You can join in a team using your team's invitation code.</p>
+			<!-- Teamname -->
+			<div class="row">
+			    <div class="col-md-3 field-label-responsive">
+				<label for="teamname">Team name</label>
+			    </div>
+			    <div class="col-md-6">
+				<div class="form-group">
+				    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+					<input type="text" name="teamname" class="form-control" id="teamname"
+					       placeholder="Team name" required autofocus>
+				    </div>
+				</div>
+			    </div>
+			</div>
 			{% endif %}
 			<!-- Username -->
 			<div class="row">
@@ -73,6 +88,16 @@
 				    </div>
 				</div>
 			    </div>
+			    {% if error.username %}
+			    <div class="col-md-3">
+				<div class="form-control-feedback">
+				    <span class="text-danger align-middle">
+					<i class="fa fa-close">{{error.username}}</i>
+				    </span>
+				</div>
+			    </div>
+			    {% endif %}
+
 			</div>
 			<!-- Invitation Code -->
 			{% if ctf.team %}
@@ -88,8 +113,17 @@
 					       placeholder="Your team's invitation code" required>
 				    </div>
 				</div>
+			    </di>
+			    {% if error.teamcode %}
+			    <div class="col-md-3">
+				<div class="form-control-feedback">
+				    <span class="text-danger align-middle">
+					<i class="fa fa-close">{{error.teamcode}}</i>
+				    </span>
+				</div>
 			    </div>
-			</div>
+			    {% endif %}
+			    </div>
 			{% endif %}
 			<!-- Password -->
 			<div class="row">
@@ -180,7 +214,7 @@
 				<hr>
 			    </div>
 			</div>
-			<p>We will send you an invitation code right after you create a team. The team members can join in the team by using the invitation code.</p>
+			<p>The team members can join in your team by using the invitation code. Keep the invitation code secret.</p>
 			<!-- Team Name -->
 			<div class="row">
 			    <div class="col-md-3 field-label-responsive">
@@ -195,26 +229,35 @@
 				    </div>
 				</div>
 			    </div>
+			    {% if error.teamname %}
+			    <div class="col-md-3">
+				<div class="form-control-feedback">
+				    <span class="text-danger align-middle">
+					<i class="fa fa-close">{{error.teamname}}</i>
+				    </span>
+				</div>
+			    </div>
+			    {% endif %}
 			</div>
-			<!-- Password -->
+			<!-- Teamcode -->
 			<div class="row">
 			    <div class="col-md-3 field-label-responsive">
-				<label for="password">E-mail</label>
+				<label for="teamcode">Invitation Code</label>
 			    </div>
 			    <div class="col-md-6">
 				<div class="form-group">
 				    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
 					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-envelope"></i></div>
-					<input type="text" name="email" class="form-control" id="email"
-					       placeholder="E-mail" required>
+					<input type="text" name="teamcode" class="form-control" id="teamcode"
+					       placeholder="Unique invitation code" required>
 				    </div>
 				</div>
 			    </div>
-			    {% if error.password %}
+			    {% if error.teamcode %}
 			    <div class="col-md-3">
 				<div class="form-control-feedback">
 				    <span class="text-danger align-middle">
-					<i class="fa fa-close">{{error.password}}</i>
+					<i class="fa fa-close">{{error.teamcode}}</i>
 				    </span>
 				</div>
 			    </div>
@@ -227,8 +270,8 @@
 				<button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Register</button>
 			    </div>
 			</div>
-			{% endif %}
-		    </form>
+		    </for>
+		    {% endif %}
 		</div>
             </div>
             <!-- /#page-content-wrapper -->

@@ -10,7 +10,7 @@ def CheckDuration():
     end   = config['ctf']['duration']['end']
     # 各種時刻を取得
     tz = pytz.timezone(config['ctf']['duration']['timezone'])
-    dt_now = datetime.datetime.now(tzinfo = tz)
+    dt_now = datetime.datetime.now(tz = tz)
     dt_start = datetime.datetime(
         start['year'], start['month'], start['date'],
         start['hour'], start['minute'], start['second'],
