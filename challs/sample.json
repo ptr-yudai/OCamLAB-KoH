@@ -3,5 +3,5 @@
     "problem" : "This is a <strong>sample</strong> problem.<br>Download the <a href=\"/static/challs/sample.tar.gz\">flag</a>.",
     "score"   : 100,
     "category": "Misc",
-    "flag"    : "FLAG{s4mple_fl4g_123}"
+    "flag"    : "SECCON{s4mple_fl4g_123}"
 }

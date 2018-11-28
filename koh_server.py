@@ -5,40 +5,9 @@ import time
 import datetime
 import glob
 import threading
-import string
-import random
-import json
 from KoH.core import Configure
 from KoH.core import Database
-
-def NewTokens():
-    """新しいトークンを生成する"""
-    teamlist = Database.Query(
-        "SELECT teamname FROM team"
-    )
-    data = {}
-    table = string.ascii_letters + "0123456789"
-    for team in teamlist:
-        token = "token-" + ''.join(random.choice(table) for i in range(32))
-        data[team['teamname']] = token
-    return data
-
-
-def GetTokens(path):
-    """古いトークンを取得する"""
-    try:
-        with open(path) as f:
-            data = json.load(f)
-    except:
-        return {}
-    return data
-
-
-def UpdateTokens(data, path):
-    """既存のトークンを上書きする"""
-    with open(path, 'w') as f:
-        json.dump(data, f)
-
+from KoH.core import Token
 
 def AddPoint(teamname, title, score):
     """防御点を追加する"""
@@ -57,10 +26,10 @@ def CheckDefense():
     """防御点を確認する"""
     config = Configure.LoadConfig()
     score = config['koh']['score']
-    path = 'tokens.json'
+    path = config['koh']['path']
     # トークン取得
-    new_tokens = NewTokens()
-    old_tokens = GetTokens(path)
+    new_tokens = Token.NewTokens()
+    old_tokens = Token.GetTokens(path)
     print("[+] Checking defense points...")
     # 各問題のトークンの調査
     for module in glob.glob("scripts/*.py"):
@@ -81,7 +50,7 @@ def CheckDefense():
                     # 加点
                     AddPoint(teamname, title, score)
     # トークン上書き
-    UpdateTokens(new_tokens, path)
+    Token.UpdateTokens(new_tokens, path)
 
     
 if __name__ == '__main__':

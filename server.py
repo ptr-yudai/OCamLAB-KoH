@@ -4,6 +4,7 @@ from KoH import app
 from KoH.core import Configure
 
 from KoH.interface import index
+from KoH.interface import token
 from KoH.interface import scoreboard
 from KoH.interface import challenges
 from KoH.interface import challenge

@@ -33,6 +33,7 @@
 	"over-open": true
     },
     "koh": {
+	"path": "token.json",
 	"interval": 300,
 	"score": 10
     }

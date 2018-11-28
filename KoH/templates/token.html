@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<script src="/static/vendor/jquery/jquery.min.js"></script>
 	<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<title>Token - OCamLab CTF</title>
+	<title>Team Token - {{ctf.name}}</title>
     </head>
 
     <body>
@@ -20,7 +20,7 @@
             <div id="sidebar-wrapper">
 		<ul class="sidebar-nav">
                     <li class="sidebar-brand">
-			<a href="/">OCamLAB CTF 8th</a>
+			<a href="/">{{ctf.brand}}</a>
                     </li>
                     <li>
 			<a href="/token">Team Token</a>
@@ -41,7 +41,7 @@
             <div id="page-content-wrapper">
 		<div class="container-fluid">
                     <h1>Team Tokens</h1>
-		    <p>Write your team token to the challenge server in order to get defense points.</p>
+		    <p>Write your team token to the challenge server in order to get the defense points.</p>
 		    <table class="table table-striped">
 			<thead class="thead-dark">
 			    <tr>
@@ -50,10 +50,10 @@
 			    </tr>
 			</thead>
 			<tbody>
-			    {% for token in token_list %}
+			    {% for teamname, token in tokens.items() %}
 			    <tr>
-				<td>{{token.0}}</td>
-				<td>{{token.1}}</td>
+				<td>{{teamname}}</td>
+				<td>{{token}}</td>
 			    </tr>
 			    {% endfor %}
 			</tbody>

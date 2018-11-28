@@ -17,11 +17,10 @@ def scoreboard():
         return SiteManager.JumpToPage('login')
     # ランキング取得
     ranking = Database.Query(
-        "SELECT * FROM team ORDER BY score, lastlog DESC"
+        "SELECT * FROM team ORDER BY score DESC, lastlog ASC"
     )
     # ログ取得
     log = Challenge.GetRecentLog()
-    print ranking
     # サイトを表示する
     return flask.render_template(
         'scoreboard.html',
