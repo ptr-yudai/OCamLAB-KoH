@@ -44,6 +44,7 @@ def CheckDefense():
             print("[-] Error in {0}".format(mod))
             print(e)
             continue
+        print(token_list)
         for token in token_list:
             for teamname in old_tokens:
                 if token == old_tokens[teamname]:
